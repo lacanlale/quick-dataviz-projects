@@ -1,0 +1,25 @@
+---
+title: "report"
+format: html
+---
+
+# Intro
+
+## Data
+
+All data displayed represented is taken form the publicly available repository ["Boston Marathon Data"](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master)
+
+
+```{r}
+library(tidyverse)
+library(purrr)
+library(readr)
+base_url <- "https://raw.githubusercontent.com/adrian3/Boston-Marathon-Data-Project/refs/heads/master/"
+
+years <- 1897:2019
+file_urls <- paste0(base_url, "results", years, ".csv")
+
+combined_data <- file_urls %>%
+  set_names(years) %>% 
+  map_dfr(read_csv, .id = "Year")
+```

@@ -5,6 +5,16 @@ format: html
 
 # Intro
 
+## Visuals Covered
+
+[ ] Total participants over time (with gender comparisons) *displayed as a stacked bar chart*
+
+[ ] Official finish times for overall winners over time *displayed as a line chart*
+
+[ ] Between-Gender comparisons of official finish times per age group *displayed as a clustered bar chart*
+
+[ ] Residence density based on pace vs age *displayed as a scatter plot*
+
 ## Data
 
 All data displayed represented is taken form the publicly available repository ["Boston Marathon Data"](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master)
@@ -16,10 +26,28 @@ library(purrr)
 library(readr)
 base_url <- "https://raw.githubusercontent.com/adrian3/Boston-Marathon-Data-Project/refs/heads/master/"
 
-years <- 1897:2019
+# years <- 1897:2019
+years <- 1897:1900
 file_urls <- paste0(base_url, "results", years, ".csv")
 
 combined_data <- file_urls %>%
   set_names(years) %>% 
   map_dfr(read_csv, .id = "Year")
+
+head(combined_data)
+```
+
+```{r}
+library(ggforce)
+library(dplyr)
+library(broom)
+library(lubridate)
+
+total_per_year <- combined_data |> 
+  count(Year, gender) |>
+  group_by(Year)
+
+total_per_year |>
+  ggplot(aes(y=n, x=Year, fill=gender)) +
+  geom_bar(position="stack", stat="identity")
 ```

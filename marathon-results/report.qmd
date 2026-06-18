@@ -11,9 +11,7 @@ format: html
 
 [ ] Official finish times for overall winners over time *displayed as a line chart*
 
-[ ] Between-Gender comparisons of official finish times per age group *displayed as a clustered bar chart*
-
-[ ] Residence density based on pace vs age *displayed as a scatter plot*
+[ ] Between-Gender comparisons of official finish times per age group *displayed as a violin plot*
 
 ## Data
 
@@ -21,13 +19,18 @@ All data displayed represented is taken form the publicly available repository [
 
 
 ```{r}
+library(ggforce)
+library(dplyr)
+library(broom)
+library(lubridate)
+library(patchwork)
 library(tidyverse)
 library(purrr)
 library(readr)
 base_url <- "https://raw.githubusercontent.com/adrian3/Boston-Marathon-Data-Project/refs/heads/master/"
 
 # years <- 1897:2019
-years <- 1897:1900
+years <- c(1897:1900, 2001)
 file_urls <- paste0(base_url, "results", years, ".csv")
 
 combined_data <- file_urls %>%
@@ -37,17 +40,55 @@ combined_data <- file_urls %>%
 head(combined_data)
 ```
 
-```{r}
-library(ggforce)
-library(dplyr)
-library(broom)
-library(lubridate)
+# Visuals
 
+## Total participants over time (with gender comparisons)
+
+```{r}
 total_per_year <- combined_data |> 
   count(Year, gender) |>
   group_by(Year)
 
-total_per_year |>
-  ggplot(aes(y=n, x=Year, fill=gender)) +
+historical_performance <- total_per_year |>
+  ggplot(aes(x=Year, y=n, fill=gender)) +
   geom_bar(position="stack", stat="identity")
+```
+
+## Official finish times for overall winners over time
+
+```{r}
+overall_winners <- combined_data |>
+  filter(gender_result==1)
+
+overall_bests <- overall_winners |>
+  ggplot(aes(x=Year, y=official_time, color=gender)) + 
+  geom_point()
+```
+
+## Between-Gender comparisons of official finish times per age group
+
+```{r}
+plot_violin_jitter <- function(dataset, x, y) {
+  dataset |>
+  ggplot(aes(x={{x}}, y={{y}})) + 
+  geom_violin() +
+  geom_jitter()
+}
+
+women_unallowed <-
+  combined_data |>
+  filter(Year < 1972)
+
+women_allowed <-
+  combined_data |>
+  filter(Year >= 1972)
+  
+  
+gender_densities <- plot_violin_jitter(women_unallowed, gender, official_time) + 
+  plot_violin_jitter(women_allowed, gender, official_time)
+```
+
+
+```{r}
+gender_densities / historical_performance / overall_bests
 ```

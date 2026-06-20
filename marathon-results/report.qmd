@@ -11,7 +11,7 @@ format: html
 
 [ ] Official finish times for overall winners over time *displayed as a line chart*
 
-[ ] Between-Gender comparisons of official finish times per age group *displayed as a violin plot*
+[ ] Between-Gender comparisons of official finish times per age group *displayed as density ridge plot*
 
 ## Data
 
@@ -19,7 +19,9 @@ All data displayed represented is taken form the publicly available repository [
 
 
 ```{r}
+#| include: false
 library(ggforce)
+library(ggridges)
 library(dplyr)
 library(broom)
 library(lubridate)
@@ -30,14 +32,12 @@ library(readr)
 base_url <- "https://raw.githubusercontent.com/adrian3/Boston-Marathon-Data-Project/refs/heads/master/"
 
 # years <- 1897:2019
-years <- c(1897:1900, 2001)
+years <- c(1897:1900, 2001, 2010)
 file_urls <- paste0(base_url, "results", years, ".csv")
 
 combined_data <- file_urls %>%
   set_names(years) %>% 
   map_dfr(read_csv, .id = "Year")
-
-head(combined_data)
 ```
 
 # Visuals
@@ -49,9 +49,16 @@ total_per_year <- combined_data |>
   count(Year, gender) |>
   group_by(Year)
 
-historical_performance <- total_per_year |>
-  ggplot(aes(x=Year, y=n, fill=gender)) +
+historical_participants <- total_per_year |>
+  ggplot(aes(x=n, y=Year, fill=gender)) +
   geom_bar(position="stack", stat="identity")
+
+total_per_year |>
+  ggplot(aes(x=n, y=Year, fill=gender)) +
+  geom_bar(position="stack", stat="identity") +
+  labs(title="A) Total Participants per Year") +
+  scale_x_time(name="Total Participants") +
+  scale_y_discrete(name="Race Year")
 ```
 
 ## Official finish times for overall winners over time
@@ -61,34 +68,43 @@ overall_winners <- combined_data |>
   filter(gender_result==1)
 
 overall_bests <- overall_winners |>
-  ggplot(aes(x=Year, y=official_time, color=gender)) + 
+  ggplot(aes(x=Year, y=official_time, color=gender, group=gender)) + 
+  geom_point()
+```
+
+```{r}
+combined_data |>
+  ggplot(aes(x=factor(Year), y=official_time, color=gender, group=gender)) + 
+  geom_line() + 
   geom_point()
 ```
 
 ## Between-Gender comparisons of official finish times per age group
 
 ```{r}
-plot_violin_jitter <- function(dataset, x, y) {
-  dataset |>
-  ggplot(aes(x={{x}}, y={{y}})) + 
-  geom_violin() +
-  geom_jitter()
-}
+gender_finish_densities <- combined_data |>
+  ggplot(aes(x=official_time, y=Year, color=gender, fill=gender)) +
+  geom_density_ridges()
 
-women_unallowed <-
-  combined_data |>
-  filter(Year < 1972)
-
-women_allowed <-
-  combined_data |>
-  filter(Year >= 1972)
-  
-  
-gender_densities <- plot_violin_jitter(women_unallowed, gender, official_time) + 
-  plot_violin_jitter(women_allowed, gender, official_time)
+combined_data |>
+  ggplot(aes(x=official_time, y=Year, color=gender, fill=gender)) +
+  geom_density_ridges(alpha=0.4) +
+  labs(title="B) Density ridges of official finish times") +
+  guides(
+    color = guide_legend(title="Gender", override.aes = list(alpha = 1)),
+    fill = guide_legend(title="Gender", override.aes = list(alpha = 1))
+  ) +
+  scale_x_time(name="Official Finish Time") +
+  scale_y_discrete(name="")
 ```
 
+## Compiled Presentation
 
 ```{r}
-gender_densities / historical_performance / overall_bests
+#| fig-width: 11
+#| fig-height: 5
+#| out-width: "100%"
+
+((historical_participants + gender_finish_densities) / overall_bests) +
+  plot_layout(guides = "collect")
 ```

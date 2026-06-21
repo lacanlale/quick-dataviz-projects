@@ -7,15 +7,23 @@ format: html
 
 ## Visuals Covered
 
-[ ] Total participants over time (with gender comparisons) *displayed as a stacked bar chart*
+[x] Total participants over time (with gender comparisons) *displayed as a stacked bar chart*
 
-[ ] Official finish times for overall winners over time *displayed as a line chart*
+[x] Official finish times for overall winners (per gender) over time *displayed as a line chart*
 
-[ ] Between-Gender comparisons of official finish times per age group *displayed as density ridge plot*
+[x] Between-Gender comparisons of official finish times per age group *displayed as density ridge plot*
 
 ## Data
 
-All data displayed represented is taken form the publicly available repository ["Boston Marathon Data"](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master)
+All data displayed represented is taken form the publicly available repository ["Boston Marathon Data"](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master). For the purpose of this excercise, the following mutations and restrictions have been applied:
+
+- The data begins at 1900 since prior year data only provides the winners
+
+- The data stops at 2014 despite having data up to 2019. This is because of the shift in dataset columns
+
+- Unspecified genders are removed from the dataset due to low size
+
+- Given the amount of data, year ranges are grouped by decade
 
 
 ```{r}
@@ -29,15 +37,24 @@ library(patchwork)
 library(tidyverse)
 library(purrr)
 library(readr)
-base_url <- "https://raw.githubusercontent.com/adrian3/Boston-Marathon-Data-Project/refs/heads/master/"
 
-# years <- 1897:2019
-years <- c(1897:1900, 2001, 2010)
+base_url <- "https://raw.githubusercontent.com/adrian3/Boston-Marathon-Data-Project/refs/heads/master/"
+gender_colors <- c("M" = "#347DC1", "F" = "#E6A6C7")
+
+years <- 1900:2014
 file_urls <- paste0(base_url, "results", years, ".csv")
 
-combined_data <- file_urls %>%
-  set_names(years) %>% 
+combined_data <- file_urls |>
+  set_names(years) |>
   map_dfr(read_csv, .id = "Year")
+
+combined_data <- combined_data |>
+  filter(gender != "U")
+
+combined_data <- combined_data |>
+  mutate(decade = paste0(floor(Year / 10) * 10, "s"))
+
+combined_data$Year <- as.integer(combined_data$Year)
 ```
 
 # Visuals
@@ -46,19 +63,17 @@ combined_data <- file_urls %>%
 
 ```{r}
 total_per_year <- combined_data |> 
-  count(Year, gender) |>
-  group_by(Year)
+  count(decade, gender) |>
+  group_by(decade)
 
 historical_participants <- total_per_year |>
-  ggplot(aes(x=n, y=Year, fill=gender)) +
-  geom_bar(position="stack", stat="identity")
-
-total_per_year |>
-  ggplot(aes(x=n, y=Year, fill=gender)) +
-  geom_bar(position="stack", stat="identity") +
-  labs(title="A) Total Participants per Year") +
-  scale_x_time(name="Total Participants") +
-  scale_y_discrete(name="Race Year")
+  ggplot(aes(x=n, y=decade, fill=gender)) +
+  geom_col(position="stack") +
+  guides(fill = "none") +
+  labs(title="A) Total Participants per Decade") +
+  scale_x_continuous(name="Total Participants") +
+  scale_y_discrete(name="Race Decade") + 
+  scale_fill_manual(values=gender_colors)
 ```
 
 ## Official finish times for overall winners over time
@@ -69,42 +84,48 @@ overall_winners <- combined_data |>
 
 overall_bests <- overall_winners |>
   ggplot(aes(x=Year, y=official_time, color=gender, group=gender)) + 
-  geom_point()
-```
-
-```{r}
-combined_data |>
-  ggplot(aes(x=factor(Year), y=official_time, color=gender, group=gender)) + 
-  geom_line() + 
-  geom_point()
+  geom_point(alpha=0.5) +
+  geom_smooth(method='lm') +
+  labs(title="C) Best finish times per Year") +
+  guides(
+    color = "none",
+    group = "none"
+  ) +
+  scale_y_time(name="Official Finish Time") +
+  scale_x_continuous(name="Race Year") + 
+  scale_color_manual(values=gender_colors) + 
+  scale_fill_manual(values=gender_colors)
 ```
 
 ## Between-Gender comparisons of official finish times per age group
 
 ```{r}
 gender_finish_densities <- combined_data |>
-  ggplot(aes(x=official_time, y=Year, color=gender, fill=gender)) +
-  geom_density_ridges()
-
-combined_data |>
-  ggplot(aes(x=official_time, y=Year, color=gender, fill=gender)) +
-  geom_density_ridges(alpha=0.4) +
+  ggplot(aes(x=official_time, y=factor(decade), color=gender, fill=gender)) +
+  geom_density_ridges(alpha=0.4, rel_min_height = 0.001) +
   labs(title="B) Density ridges of official finish times") +
   guides(
     color = guide_legend(title="Gender", override.aes = list(alpha = 1)),
     fill = guide_legend(title="Gender", override.aes = list(alpha = 1))
   ) +
   scale_x_time(name="Official Finish Time") +
-  scale_y_discrete(name="")
+  scale_y_discrete(name="") + 
+  scale_color_manual(values=gender_colors) + 
+  scale_fill_manual(values=gender_colors)
 ```
 
 ## Compiled Presentation
 
 ```{r}
 #| fig-width: 11
-#| fig-height: 5
+#| fig-height: 11
 #| out-width: "100%"
 
 ((historical_participants + gender_finish_densities) / overall_bests) +
-  plot_layout(guides = "collect")
+  plot_layout(guides = "collect") +
+  plot_annotation(
+    title = 'Overview of Boston Marathon finish times from 1900-2014',
+    subtitle = 'Colors distinguished by gender',
+    caption = 'Source: Boston-Marathon-Data-Project available on Github by user adrian3'
+  )
 ```

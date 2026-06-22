@@ -1,5 +1,5 @@
 ---
-title: "report"
+title: "Boston Marathon Data Visual Exercise"
 format: html
 ---
 
@@ -15,7 +15,7 @@ format: html
 
 ## Data
 
-All data displayed represented is taken form the publicly available repository ["Boston Marathon Data"](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master). For the purpose of this excercise, the following mutations and restrictions have been applied:
+All data displayed represented is taken form the publicly available repository ["Boston Marathon Data"](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master). For the purpose of this exercise, the following mutations and restrictions have been applied:
 
 - The data begins at 1900 since prior year data only provides the winners
 
@@ -27,6 +27,7 @@ All data displayed represented is taken form the publicly available repository [
 
 
 ```{r}
+#| warning: false
 #| include: false
 library(ggforce)
 library(ggridges)
@@ -51,10 +52,10 @@ combined_data <- file_urls |>
 combined_data <- combined_data |>
   filter(gender != "U")
 
+combined_data$Year <- as.integer(combined_data$Year)
+
 combined_data <- combined_data |>
   mutate(decade = paste0(floor(Year / 10) * 10, "s"))
-
-combined_data$Year <- as.integer(combined_data$Year)
 ```
 
 # Visuals

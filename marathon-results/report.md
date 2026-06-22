@@ -1,68 +1,42 @@
----
-title: "Boston Marathon Data Visual Exercise"
-format: gfm
----
+# Boston Marathon Data Visual Exercise
+
 
 # Intro
 
 ## Visuals Covered
 
-[x] Total participants over time (with gender comparisons) *displayed as a stacked bar chart*
+\[x\] Total participants over time (with gender comparisons) *displayed
+as a stacked bar chart*
 
-[x] Official finish times for overall winners (per gender) over time *displayed as a line chart*
+\[x\] Official finish times for overall winners (per gender) over time
+*displayed as a line chart*
 
-[x] Between-Gender comparisons of official finish times per age group *displayed as density ridge plot*
+\[x\] Between-Gender comparisons of official finish times per age group
+*displayed as density ridge plot*
 
 ## Data
 
-All data displayed represented is taken form the publicly available repository ["Boston Marathon Data"](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master). For the purpose of this exercise, the following mutations and restrictions have been applied:
+All data displayed represented is taken form the publicly available
+repository [“Boston Marathon
+Data”](https://github.com/adrian3/Boston-Marathon-Data-Project/tree/master).
+For the purpose of this exercise, the following mutations and
+restrictions have been applied:
 
-- The data begins at 1900 since prior year data only provides the winners
+- The data begins at 1900 since prior year data only provides the
+  winners
 
-- The data stops at 2014 despite having data up to 2019. This is because of the shift in dataset columns
+- The data stops at 2014 despite having data up to 2019. This is because
+  of the shift in dataset columns
 
 - Unspecified genders are removed from the dataset due to low size
 
 - Given the amount of data, year ranges are grouped by decade
 
-
-```{r}
-#| warning: false
-#| include: false
-library(ggforce)
-library(ggridges)
-library(dplyr)
-library(broom)
-library(lubridate)
-library(patchwork)
-library(tidyverse)
-library(purrr)
-library(readr)
-
-base_url <- "https://raw.githubusercontent.com/adrian3/Boston-Marathon-Data-Project/refs/heads/master/"
-gender_colors <- c("M" = "#347DC1", "F" = "#E6A6C7")
-
-years <- 1900:2014
-file_urls <- paste0(base_url, "results", years, ".csv")
-
-combined_data <- file_urls |>
-  set_names(years) |>
-  map_dfr(read_csv, .id = "Year")
-
-combined_data <- combined_data |>
-  filter(gender != "U")
-
-combined_data$Year <- as.integer(combined_data$Year)
-
-combined_data <- combined_data |>
-  mutate(decade = paste0(floor(Year / 10) * 10, "s"))
-```
-
 # Visuals
 
 ## Total participants over time (with gender comparisons)
 
-```{r}
+``` r
 total_per_year <- combined_data |> 
   count(decade, gender) |>
   group_by(decade)
@@ -79,7 +53,7 @@ historical_participants <- total_per_year |>
 
 ## Official finish times for overall winners over time
 
-```{r}
+``` r
 overall_winners <- combined_data |>
   filter(gender_result==1)
 
@@ -100,7 +74,7 @@ overall_bests <- overall_winners |>
 
 ## Between-Gender comparisons of official finish times per age group
 
-```{r}
+``` r
 gender_finish_densities <- combined_data |>
   ggplot(aes(x=official_time, y=factor(decade), color=gender, fill=gender)) +
   geom_density_ridges(alpha=0.4, rel_min_height = 0.001) +
@@ -117,11 +91,7 @@ gender_finish_densities <- combined_data |>
 
 ## Compiled Presentation
 
-```{r}
-#| fig-width: 11
-#| fig-height: 11
-#| out-width: "100%"
-
+``` r
 ((historical_participants + gender_finish_densities) / overall_bests) +
   plot_layout(guides = "collect") +
   plot_annotation(
@@ -130,3 +100,15 @@ gender_finish_densities <- combined_data |>
     caption = 'Source: Boston-Marathon-Data-Project available on Github by user adrian3'
   )
 ```
+
+    Picking joint bandwidth of 242
+
+    Warning: Duplicated `override.aes` is ignored.
+
+    `geom_smooth()` using formula = 'y ~ x'
+
+    Warning: No shared levels found between `names(values)` of the manual scale and the
+    data's fill values.
+
+<img src="report_files/figure-commonmark/unnamed-chunk-5-1.png"
+style="width:100.0%" />

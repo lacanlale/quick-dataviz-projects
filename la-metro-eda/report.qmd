@@ -1,0 +1,35 @@
+---
+title: "report"
+format: gfm
+---
+
+```{r}
+library(jsonlite)
+library(ggforce)
+library(ggplot2)
+library(tidyverse)
+
+flatten_json <- function(json_data) {
+  bind_rows(
+    lapply(json_data, function(months) {
+      bind_rows(
+        lapply(months, function(x) as.data.frame(x)), .id = "month")
+      }
+    ), 
+  .id = "year")
+}
+
+base_url <- "https://raw.githubusercontent.com/LACMTA/data-safety/main/processed/"
+
+arrest_data <- fromJSON(paste0(base_url, "arrests.json"))
+arrest_data <- flatten_json(arrest_data)
+
+crimes_data <- fromJSON(paste0(base_url, "crimes.json"))
+crimes_data <- flatten_json(crimes_data)
+
+fares_data <- fromJSON(paste0(base_url, "fare.json"))
+fares_data <- flatten_json(fares_data)
+
+ridership_data <- fromJSON(paste0(base_url, "ridership.json"))
+ridership_data <- flatten_json(ridership_data)
+```

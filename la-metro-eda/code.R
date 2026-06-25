@@ -1,25 +1,3 @@
----
-title: "Exploration of LA Metro's open-source dataset"
-format: gfm
----
-
-# Intro
-
-## Visuals Covered
-
-\[x\] Ridership of LA Metro with comparison of pre- vs post-Covid time frames *displayed as a line and point chart*
-
-\[x\] Total crimes and arrests recorded *displayed as a line and stacked bar chart*
-
-\[x\] Composition of reported crime types *displayed as proportion bar plot*
-
-## Data
-
-All data displayed represented is taken from ["LA Metro's open source safety dataset"](https://github.com/LACMTA/data-safety).
-
-```{r}
-#| warning: false
-#| include: false
 library(dplyr)
 library(lubridate)
 library(jsonlite)
@@ -31,13 +9,13 @@ library(patchwork)
 
 flatten_json <- function(json_data, melted_cols) {
   json_table <-
-      bind_rows(
+    bind_rows(
       lapply(json_data, function(months) {
         bind_rows(
           lapply(months, function(x) as.data.frame(x)), .id = "month")
-        }
+      }
       ), 
-    .id = "year")
+      .id = "year")
   
   return(
     pivot_longer(
@@ -46,10 +24,10 @@ flatten_json <- function(json_data, melted_cols) {
       names_to = "type",
       values_to = "count"
     ) |>
-    mutate(date = 
-             if(is.numeric(month)) { make_date(year = year, month = month, day = 1) }
+      mutate(date = 
+               if(is.numeric(month)) { make_date(year = year, month = month, day = 1) }
              else {my(paste(month, year))} 
-    )
+      )
   )
 }
 
@@ -69,21 +47,15 @@ crimes_data <- flatten_json(crimes_data,
                               "rail.persons",
                               "rail.property",
                               "rail.society"
-                              )
                             )
+)
 
 fares_data <- fromJSON(paste0(base_url, "fare.json"))
 fares_data <- flatten_json(fares_data, c("bus", "rail"))
 
 ridership_data <- fromJSON(paste0(base_url, "ridership.json"))
 ridership_data <- flatten_json(ridership_data, c("bus", "rail"))
-```
 
-# Visuals
-
-## Ridership data plotted
-
-```{r}
 ridership_plot <- ridership_data |>
   mutate(
     period = case_when(
@@ -112,11 +84,7 @@ ridership_plot <- ridership_data |>
   scale_y_continuous(name="Ridership", labels = label_comma()) +
   geom_smooth(method = "lm") +
   labs(title="Ridership Total")
-```
 
-## Arrests and Crime data combined
-
-```{r}
 total_crimes_and_arrests_plot <- 
   crimes_data |>
   filter(str_detect(type, "total")) |>
@@ -208,13 +176,7 @@ crimes_broken_out_plot <-
   ) +
   scale_x_date(name="") + 
   labs(title="Composition of Crimes by Type")
-```
 
-## Compiled Presentation
-
-```{r}
-#| fig-width: 11
-#| fig-height: 11
 (total_crimes_and_arrests_plot / crimes_broken_out_plot / ridership_plot) + 
   plot_layout(heights = c(1, 3, 1)) +
   plot_annotation(
@@ -222,4 +184,3 @@ crimes_broken_out_plot <-
     subtitle = 'Colors distinguished by transportation type (bus vs rail)',
     caption = 'Source: LA Metros own aggregated, open-source data'
   )
-```

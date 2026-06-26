@@ -1,0 +1,1206 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20261.26.0512.1609                               -->
+<workbook include-phone-layouts='false' original-version='18.1' source-build='2026.1.5 (20261.26.0512.1609)' version='18.1' xml:base='http://localhost:9100' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AccessibleZoneTabOrder />
+    <AnimationOnByDefault />
+    <IncludePhoneLayoutsOptOut />
+    <_.fcp.IndividualControlFormatting.true...IndividualControlFormatting />
+    <MapboxVectorStylesAndLayers />
+    <MarkAnimation />
+    <ODataJavaConnector />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SetMembershipControl />
+    <SheetIdentifierTracking />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
+  </document-format-change-manifest>
+  <repository-location id='LAActiveBusinessesOpenDataset' path='/workbooks' revision='1.0' />
+  <preferences />
+  <datasources>
+    <datasource caption='6rrh-rzua (data.lacity.org/api/odata/v4/6rrh-rzua?$format=json)' inline='true' name='odata.0vzqavn0xyjd1q1dev61p14z7lbr' version='18.1'>
+      <connection authentication='auth-none' class='odata' server='https://data.lacity.org/api/odata/v4/6rrh-rzua?$format=json' username='' workgroup-auth-mode=''>
+        <relation connection='odata.0vzqavn0xyjd1q1dev61p14z7lbr' name='6rrh-rzua' table='[6rrh-rzua]' type='table' />
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>__id</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[__id]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>__id</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>false</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_1</remote-name>
+            <remote-type>1</remote-type>
+            <local-name>[location_1]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_1</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_1_zip</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_1_zip]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_1_zip</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_description]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_description</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>city</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[city]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>city</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>street_address</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[street_address]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>street_address</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dba_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[dba_name]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>dba_name</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_1_city</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_1_city]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_1_city</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_end_date</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_end_date]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_end_date</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>council_district</remote-name>
+            <remote-type>14</remote-type>
+            <local-name>[council_district]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>council_district</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <scale>-1</scale>
+            <contains-null>true</contains-null>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>primary_naics_description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[primary_naics_description]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>primary_naics_description</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mailing_zip_code</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[mailing_zip_code]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>mailing_zip_code</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>zip_code</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[zip_code]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>zip_code</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>business_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[business_name]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>business_name</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mailing_address</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[mailing_address]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>mailing_address</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>naics</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[naics]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>naics</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_start_date</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_start_date]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_start_date</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>mailing_city</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[mailing_city]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>mailing_city</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_1_address</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_1_address]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_1_address</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_1_state</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_1_state]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_1_state</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>location_account</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[location_account]</local-name>
+            <parent-name>[6rrh-rzua]</parent-name>
+            <remote-alias>location_account</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='TypeIsVarchar'>&quot;true&quot;</attribute>
+            </attributes>
+            <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Measure Names' datatype='string' name='[:Measure Names]' role='dimension' type='nominal' />
+      <column caption='Measure Values' datatype='real' name='[Multiple Values]' role='measure' type='quantitative' />
+      <column caption='__Id' datatype='string' name='[__id]' role='dimension' type='nominal' />
+      <column caption='LAActiveBusinesses' datatype='table' name='[__tableau_internal_object_id__].[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]' role='measure' type='quantitative' />
+      <column caption='Business Name' datatype='string' name='[business_name]' role='dimension' type='nominal' />
+      <column caption='City' datatype='string' name='[city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <column caption='Council District' datatype='real' name='[council_district]' role='measure' type='quantitative' />
+      <column caption='Dba Name' datatype='string' name='[dba_name]' role='dimension' type='nominal' />
+      <column caption='Location 1' datatype='string' name='[location_1]' role='dimension' type='nominal' />
+      <column caption='Location 1 Address' datatype='string' name='[location_1_address]' role='dimension' type='nominal' />
+      <column caption='Location 1 City' datatype='string' name='[location_1_city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <column caption='Location 1 State' datatype='string' name='[location_1_state]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column caption='Location 1 Zip' datatype='string' name='[location_1_zip]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
+      <column caption='Location Account' datatype='string' name='[location_account]' role='dimension' type='nominal' />
+      <column caption='Location Description' datatype='string' name='[location_description]' role='dimension' type='nominal' />
+      <column aggregation='Count' caption='Location End Date' datatype='date' datatype-customized='true' name='[location_end_date]' role='dimension' type='ordinal' />
+      <column aggregation='Count' caption='Location Start Date' datatype='datetime' datatype-customized='true' name='[location_start_date]' role='dimension' type='ordinal' />
+      <column caption='Mailing Address' datatype='string' name='[mailing_address]' role='dimension' type='nominal' />
+      <column caption='Mailing City' datatype='string' name='[mailing_city]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <column caption='Mailing Zip Code' datatype='string' name='[mailing_zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
+      <column caption='Naics' datatype='string' name='[naics]' role='dimension' type='nominal' />
+      <column caption='Primary Naics Description' datatype='string' name='[primary_naics_description]' role='dimension' type='nominal' />
+      <column caption='Street Address' datatype='string' name='[street_address]' role='dimension' type='nominal' />
+      <column caption='Zip Code' datatype='string' name='[zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
+      <column-instance column='[council_district]' derivation='None' name='[none:council_district:ok]' pivot='key' type='ordinal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='6rrh-rzua_7AD500AE50A94EED8066931398FBC422' units='records'>
+        <connection authentication='auth-none' author-locale='en_US' class='hyper' dbname='Data/Extracts/odata_0vzqavn0xyjd1q1dev61p14z7l.hyper' default-settings='yes' schema='Extract' tablename='Extract' update-time='06/26/2026 05:43:05 PM'>
+          <relation name='6rrh-rzua' table='[Extract].[6rrh-rzua]' type='table' />
+          <refresh>
+            <refresh-event add-from-file-path='6rrh-rzua (data.lacity.org/api/odata/v4/6rrh-rzua?$format=json)' increment-value='%null%' refresh-type='create' rows-inserted='629431' timestamp-start='2026-06-26 17:37:51.810' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>__id</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[__id]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>__id</remote-alias>
+              <ordinal>0</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>629431</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_1</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_1]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_1</remote-alias>
+              <ordinal>1</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_1_zip</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_1_zip]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_1_zip</remote-alias>
+              <ordinal>2</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_description</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_description]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_description</remote-alias>
+              <ordinal>3</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>282631</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[city]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>city</remote-alias>
+              <ordinal>4</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1299</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>street_address</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[street_address]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>street_address</remote-alias>
+              <ordinal>5</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>478150</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>dba_name</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[dba_name]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>dba_name</remote-alias>
+              <ordinal>6</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>333380</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_1_city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_1_city]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_1_city</remote-alias>
+              <ordinal>7</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_end_date</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_end_date]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_end_date</remote-alias>
+              <ordinal>8</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>council_district</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[council_district]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>council_district</remote-alias>
+              <ordinal>9</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>16</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>primary_naics_description</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[primary_naics_description]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>primary_naics_description</remote-alias>
+              <ordinal>10</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1747</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>mailing_zip_code</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[mailing_zip_code]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>mailing_zip_code</remote-alias>
+              <ordinal>11</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>83905</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>zip_code</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[zip_code]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>zip_code</remote-alias>
+              <ordinal>12</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>148309</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>business_name</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[business_name]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>business_name</remote-alias>
+              <ordinal>13</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>564771</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>mailing_address</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[mailing_address]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>mailing_address</remote-alias>
+              <ordinal>14</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>180699</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>naics</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[naics]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>naics</remote-alias>
+              <ordinal>15</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1762</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_start_date</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_start_date]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_start_date</remote-alias>
+              <ordinal>16</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>31874</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>mailing_city</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[mailing_city]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>mailing_city</remote-alias>
+              <ordinal>17</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1996</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_1_address</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_1_address]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_1_address</remote-alias>
+              <ordinal>18</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_1_state</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_1_state]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_1_state</remote-alias>
+              <ordinal>19</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>location_account</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[location_account]</local-name>
+              <parent-name>[6rrh-rzua]</parent-name>
+              <remote-alias>location_account</remote-alias>
+              <ordinal>20</ordinal>
+              <family>6rrh-rzua</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>629431</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LROOT' />
+              <object-id>[6rrh-rzua_7AD500AE50A94EED8066931398FBC422]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:council_district:ok]' type='palette'>
+            <map to='#499894'>
+              <bucket>8.0</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>0.0</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>4.0</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>12.0</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>9.0</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>5.0</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>1.0</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>6.0</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>13.0</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>14.0</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>10.0</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>7.0</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2.0</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>15.0</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>11.0</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>3.0</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <object-graph>
+        <objects>
+          <object caption='LAActiveBusinesses' id='6rrh-rzua_7AD500AE50A94EED8066931398FBC422'>
+            <properties context=''>
+              <relation connection='odata.0vzqavn0xyjd1q1dev61p14z7lbr' name='6rrh-rzua' table='[6rrh-rzua]' type='table' />
+            </properties>
+            <properties context='extract'>
+              <relation name='6rrh-rzua' table='[Extract].[6rrh-rzua]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <actions>
+    <action caption='Highlight 1 (generated)' name='[Action1_6C1E15113D3C4667922E9BAB72D06B6B]'>
+      <activation auto-clear='true' type='on-select' />
+      <source dashboard='Active Businesses per Council District' type='sheet' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Council District' />
+        <param name='target' value='Active Businesses per Council District' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='Location of Businesses'>
+      <repository-location id='LocationofBusinesses' path='/workbooks/LAActiveBusinessesOpenDataset' revision='' />
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='20'>Location of Active Businesses by Zipcode</run>
+            <run>Æ&#10;</run>
+            <run fontsize='12' italic='true'>Colored by Council District</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='6rrh-rzua (data.lacity.org/api/odata/v4/6rrh-rzua?$format=json)' name='odata.0vzqavn0xyjd1q1dev61p14z7lbr' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='odata.0vzqavn0xyjd1q1dev61p14z7lbr'>
+            <column caption='Business Name' datatype='string' name='[business_name]' role='dimension' type='nominal' />
+            <column-instance column='[zip_code]' derivation='Count' name='[cnt:zip_code:qk]' pivot='key' type='quantitative' />
+            <column caption='Council District' datatype='real' name='[council_district]' role='measure' type='quantitative' />
+            <column-instance column='[business_name]' derivation='None' name='[none:business_name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[council_district]' derivation='None' name='[none:council_district:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[council_district]' derivation='None' name='[none:council_district:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[zip_code]' derivation='None' name='[none:zip_code:nk]' pivot='key' type='nominal' />
+            <column caption='Zip Code' datatype='string' name='[zip_code]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:business_name:nk]'>
+            <groupfilter function='level-members' level='[none:business_name:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:qk]' included-values='in-range'>
+            <min>1.0</min>
+            <max>15.0</max>
+          </filter>
+          <slices>
+            <column>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:qk]</column>
+            <column>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:business_name:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[Longitude (generated)]' field-type='quantitative' max='-13077622.50897721' min='-13226935.309662597' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[Latitude (generated)]' field-type='quantitative' max='4073780.0812086798' min='4005868.3416811675' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <_.fcp.IndividualControlFormatting.true...style-rule element='legend'>
+            <_.fcp.IndividualControlFormatting.true...format attr='background-color' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' id='legend-color' value='#333333b4' />
+            <_.fcp.IndividualControlFormatting.true...format attr='background-color' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[cnt:zip_code:qk]' id='legend-size' value='#333333b4' />
+          </_.fcp.IndividualControlFormatting.true...style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='size' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[cnt:zip_code:qk]' value='Total per Zipcode&#10;'>
+              <formatted-text>
+                <run bold='true' fontsize='12'>Total per Zipcode</run>
+                <run>Æ&#10;</run>
+              </formatted-text>
+            </format>
+            <format attr='color' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' value='District'>
+              <formatted-text>
+                <run bold='true' fontsize='12'>District</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+          <style-rule element='map-layer'>
+            <format attr='enabled' id='parks' value='false' />
+            <format attr='enabled' id='landcover_wood' value='false' />
+            <format attr='enabled' id='landcover_scrub' value='false' />
+            <format attr='enabled' id='landcover_grass' value='false' />
+            <format attr='enabled' id='landcover_crop' value='false' />
+            <format attr='enabled' id='tunnel-service-link-track-case' value='true' />
+            <format attr='enabled' id='tunnel-street_limited-case' value='true' />
+            <format attr='enabled' id='tunnel-street-case' value='true' />
+            <format attr='enabled' id='tunnel-secondary-tertiary-case' value='true' />
+            <format attr='enabled' id='tunnel-primary-case' value='true' />
+            <format attr='enabled' id='tunnel-trunk_link-case' value='true' />
+            <format attr='enabled' id='tunnel-motorway_link-case' value='true' />
+            <format attr='enabled' id='tunnel-trunk-case' value='true' />
+            <format attr='enabled' id='tunnel-motorway-case' value='true' />
+            <format attr='enabled' id='tunnel-trunk_link' value='true' />
+            <format attr='enabled' id='tunnel-motorway_link' value='true' />
+            <format attr='enabled' id='tunnel-service-link-track' value='true' />
+            <format attr='enabled' id='tunnel-street_limited' value='true' />
+            <format attr='enabled' id='tunnel-street' value='true' />
+            <format attr='enabled' id='tunnel-tertiary' value='true' />
+            <format attr='enabled' id='tunnel-secondary' value='true' />
+            <format attr='enabled' id='tunnel-primary' value='true' />
+            <format attr='enabled' id='tunnel-trunk' value='true' />
+            <format attr='enabled' id='tunnel-motorway' value='true' />
+            <format attr='enabled' id='road-street-low' value='true' />
+            <format attr='enabled' id='road-street_limited-low' value='true' />
+            <format attr='enabled' id='road-pedestrian-case' value='true' />
+            <format attr='enabled' id='road-service-link-track-case' value='true' />
+            <format attr='enabled' id='road-street_limited-case' value='true' />
+            <format attr='enabled' id='road-street-case' value='true' />
+            <format attr='enabled' id='road-tertiary-case' value='true' />
+            <format attr='enabled' id='road-secondary-case' value='true' />
+            <format attr='enabled' id='road-primary-case' value='true' />
+            <format attr='enabled' id='road-motorway_link-case' value='true' />
+            <format attr='enabled' id='road-trunk_link-case' value='true' />
+            <format attr='enabled' id='road-trunk-case' value='true' />
+            <format attr='enabled' id='road-motorway-case' value='true' />
+            <format attr='enabled' id='road-trunk_link' value='true' />
+            <format attr='enabled' id='road-motorway_link' value='true' />
+            <format attr='enabled' id='road-path' value='true' />
+            <format attr='enabled' id='road-pedestrian' value='true' />
+            <format attr='enabled' id='road-polygon' value='true' />
+            <format attr='enabled' id='road-service-link-track' value='true' />
+            <format attr='enabled' id='road-street_limited' value='true' />
+            <format attr='enabled' id='road-street' value='true' />
+            <format attr='enabled' id='road-tertiary' value='true' />
+            <format attr='enabled' id='road-secondary' value='true' />
+            <format attr='enabled' id='road-primary' value='true' />
+            <format attr='enabled' id='road-trunk' value='true' />
+            <format attr='enabled' id='road-motorway' value='true' />
+            <format attr='enabled' id='road-rail' value='true' />
+            <format attr='enabled' id='road-rail-tracks' value='true' />
+            <format attr='enabled' id='bridge-street-low' value='true' />
+            <format attr='enabled' id='bridge-street_limited-low' value='true' />
+            <format attr='enabled' id='bridge-pedestrian-case' value='true' />
+            <format attr='enabled' id='bridge-service-link-track-case' value='true' />
+            <format attr='enabled' id='bridge-street_limited-case' value='true' />
+            <format attr='enabled' id='bridge-street-case' value='true' />
+            <format attr='enabled' id='bridge-tertiary-case' value='true' />
+            <format attr='enabled' id='bridge-secondary-case' value='true' />
+            <format attr='enabled' id='bridge-primary-case' value='true' />
+            <format attr='enabled' id='bridge-trunk_link-case' value='true' />
+            <format attr='enabled' id='bridge-motorway_link-case' value='true' />
+            <format attr='enabled' id='bridge-trunk-case' value='true' />
+            <format attr='enabled' id='bridge-motorway-case' value='true' />
+            <format attr='enabled' id='bridge-trunk_link' value='true' />
+            <format attr='enabled' id='bridge-motorway_link' value='true' />
+            <format attr='enabled' id='bridge-path' value='true' />
+            <format attr='enabled' id='bridge-pedestrian' value='true' />
+            <format attr='enabled' id='bridge-service-link-track' value='true' />
+            <format attr='enabled' id='bridge-street_limited' value='true' />
+            <format attr='enabled' id='bridge-street' value='true' />
+            <format attr='enabled' id='bridge-tertiary' value='true' />
+            <format attr='enabled' id='bridge-secondary' value='true' />
+            <format attr='enabled' id='bridge-primary' value='true' />
+            <format attr='enabled' id='bridge-trunk' value='true' />
+            <format attr='enabled' id='bridge-motorway' value='true' />
+            <format attr='enabled' id='bridge-rail' value='true' />
+            <format attr='enabled' id='bridge-rail-tracks' value='true' />
+            <format attr='enabled' id='bridge-trunk_link-2-case' value='true' />
+            <format attr='enabled' id='bridge-motorway_link-2-case' value='true' />
+            <format attr='enabled' id='bridge-trunk-2-case' value='true' />
+            <format attr='enabled' id='bridge-motorway-2-case' value='true' />
+            <format attr='enabled' id='bridge-trunk_link-2' value='true' />
+            <format attr='enabled' id='bridge-motorway_link-2' value='true' />
+            <format attr='enabled' id='bridge-trunk-2' value='true' />
+            <format attr='enabled' id='bridge-motorway-2' value='true' />
+            <format attr='enabled' id='road-shields-2-white' value='true' />
+            <format attr='enabled' id='road-shields-2-black' value='true' />
+            <format attr='enabled' id='road-shields-1-white' value='true' />
+            <format attr='enabled' id='road-shields-1-black' value='true' />
+            <format attr='enabled' id='road-label-small' value='true' />
+            <format attr='enabled' id='road-label-big' value='true' />
+            <format attr='enabled' id='place-village' value='true' />
+            <format attr='enabled' id='place-town' value='true' />
+            <format attr='enabled' id='place-islands' value='true' />
+            <format attr='enabled' id='place-islands-2' value='true' />
+            <format attr='enabled' id='place-city-sm' value='true' />
+            <format attr='enabled' id='place-city-md-s' value='true' />
+            <format attr='enabled' id='place-city-md-n' value='true' />
+            <format attr='enabled' id='place-city-lg-s' value='true' />
+            <format attr='enabled' id='place-city-lg-n' value='true' />
+            <format attr='enabled' id='place-capital-s' value='true' />
+            <format attr='enabled' id='place-capital-n' value='true' />
+            <format attr='enabled' id='b01002_001e' value='false' />
+            <format attr='enabled' id='b01002_002e' value='false' />
+            <format attr='enabled' id='b01002_003e' value='false' />
+            <format attr='enabled' id='dp02_0001e' value='false' />
+            <format attr='enabled' id='dp02_0015e' value='false' />
+            <format attr='enabled' id='dp03_0027e_plus_dp03_0029e' value='false' />
+            <format attr='enabled' id='dp03_0028e' value='false' />
+            <format attr='enabled' id='dp03_0030e_plus_dp03_0031e' value='false' />
+            <format attr='enabled' id='dp03_0062e' value='false' />
+            <format attr='enabled' id='dp03_0088e' value='false' />
+            <format attr='enabled' id='dp04_0001e' value='false' />
+            <format attr='enabled' id='dp04_0046e' value='false' />
+            <format attr='enabled' id='dp04_0047e' value='false' />
+            <format attr='enabled' id='dp04_0089e' value='false' />
+            <format attr='enabled' id='dp05_0001e' value='false' />
+            <format attr='enabled' id='dp05_0002e_div_dp05_0003e' value='false' />
+            <format attr='enabled' id='dp05_0032e' value='false' />
+            <format attr='enabled' id='dp05_0033e' value='false' />
+            <format attr='enabled' id='dp05_0034e' value='false' />
+            <format attr='enabled' id='dp05_0039e' value='false' />
+            <format attr='enabled' id='dp05_0047e' value='false' />
+            <format attr='enabled' id='dp05_0053e' value='false' />
+            <format attr='enabled' id='dp05_0066e' value='false' />
+            <format attr='enabled' id='dp05_0077e' value='false' />
+          </style-rule>
+          <style-rule element='map'>
+            <format attr='washout' value='0.5' />
+            <format attr='map-style' value='dark' />
+          </style-rule>
+          <style-rule element='map-data-layer'>
+            <format attr='palette' value='tableau-map-blue-green-light' />
+            <format attr='geo-area-type' value='State' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:zip_code:nk]' />
+              <color column='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' />
+              <size column='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[cnt:zip_code:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='4.2992000579833984' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[Latitude (generated)]</rows>
+        <cols>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{69D558D9-3FAD-41D2-89AF-2F21CCEB100A}' />
+    </worksheet>
+    <worksheet name='Total Business Distribution'>
+      <repository-location id='TotalBusinessDistribution' path='/workbooks/LAActiveBusinessesOpenDataset' revision='' />
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='20'>Distribution of Businesses</run>
+            <run>Æ&#10;</run>
+            <run fontsize='12' italic='true'>Colored by Council District</run>
+            <run>Æ&#10;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='6rrh-rzua (data.lacity.org/api/odata/v4/6rrh-rzua?$format=json)' name='odata.0vzqavn0xyjd1q1dev61p14z7lbr' />
+          </datasources>
+          <datasource-dependencies datasource='odata.0vzqavn0xyjd1q1dev61p14z7lbr'>
+            <column caption='__Id' datatype='string' name='[__id]' role='dimension' type='nominal' />
+            <column-instance column='[__id]' derivation='Count' name='[cnt:__id:qk]' pivot='key' type='quantitative' />
+            <column caption='Council District' datatype='real' name='[council_district]' role='measure' type='quantitative' />
+            <column-instance column='[council_district]' derivation='None' name='[none:council_district:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[council_district]' derivation='None' name='[none:council_district:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:qk]' included-values='in-range'>
+            <min>1.0</min>
+            <max>15.0</max>
+          </filter>
+          <slices>
+            <column>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[cnt:__id:qk]' scope='rows' value='Total' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:qk]' value='N' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:qk]' value='N' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+            <encodings>
+              <color column='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+                <format attr='size' value='2' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[cnt:__id:qk]</rows>
+        <cols>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:qk]</cols>
+      </table>
+      <simple-id uuid='{898A4917-33D4-4DE1-BDDD-D8EB261D402E}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard enable-sort-zone-taborder='true' name='Active Businesses per Council District'>
+      <repository-location id='ActiveBusinessesperCouncilDistrict' path='/workbooks/LAActiveBusinessesOpenDataset' revision='' />
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <zones>
+        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='5' param='horz' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='98000' id='3' type-v2='layout-basic' w='98400' x='800' y='1000'>
+              <zone h='69625' id='1' name='Location of Businesses' w='98400' x='800' y='29375'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='28375' id='8' name='Total Business Distribution' w='98400' x='800' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='41250' id='7' name='Location of Businesses' pane-specification-id='0' param='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' type-v2='color' w='6800' x='90700' y='41125' />
+        <zone fixed-size='122' h='15750' id='6' is-fixed='true' name='Location of Businesses' pane-specification-id='0' param='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[cnt:zip_code:qk]' type-v2='size' w='18300' x='71100' y='41125' />
+      </zones>
+      <simple-id uuid='{484199E8-3B72-4213-AB26-94A8341FFC02}' />
+    </dashboard>
+  </dashboards>
+  <windows>
+    <window class='worksheet' name='Location of Businesses'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' type='highlighter' />
+            <card param='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[cnt:zip_code:qk]' type='size' />
+            <card param='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:business_name:nk]</field>
+            <field>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:location_1_zip:nk]</field>
+            <field>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:zip_code:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{99020544-D973-4AB0-9E8D-CBC67F8028BE}' />
+    </window>
+    <window class='worksheet' name='Total Business Distribution'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='31'>
+            <card type='columns' />
+          </strip>
+          <strip size='31'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]</field>
+            <field>[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[sum:council_district:ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{07F462F8-ADA6-4FBD-8C67-B01DC716AF59}' />
+    </window>
+    <window class='dashboard' maximized='true' name='Active Businesses per Council District'>
+      <viewpoints>
+        <viewpoint name='Location of Businesses'>
+          <zoom type='entire-view' />
+          <highlight field='[odata.0vzqavn0xyjd1q1dev61p14z7lbr].[none:council_district:ok]'>
+            <bucket-selection />
+          </highlight>
+        </viewpoint>
+        <viewpoint name='Total Business Distribution'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{932E93F5-9FFC-4C82-8B25-5A184182C519}' />
+    </window>
+  </windows>
+</workbook>

@@ -1,0 +1,51 @@
+---
+title: "Powerlifting Meet Performances across Divisions"
+format: gfm
+---
+
+# Intro
+
+## Visuals Covered
+
+## Data
+
+All data displayed and represented is taken from ["OpenPLs free open-source dataset on powerlifting meets"](https://openpowerlifting.gitlab.io/opl-csv/a).
+
+```{r}
+#| warning: false
+#| include: false
+library(dplyr)
+library(lubridate)
+library(jsonlite)
+library(ggforce)
+library(ggplot2)
+library(tidyverse)
+library(scales)
+library(patchwork)
+
+data <- read_csv("openpowerlifting-2026-06-27.csv") 
+```
+
+# Cleaning
+
+```{r}
+summary(data)
+```
+
+```{r}
+data |>
+  select(
+    where(is.character) 
+    & !Name
+    & !MeetTown
+    & !MeetName
+  ) |>
+  lapply(unique)
+```
+
+# Visuals
+
+```{r}
+# data |>
+#   group_by
+```

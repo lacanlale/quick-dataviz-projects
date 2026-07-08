@@ -7,6 +7,14 @@ format: gfm
 
 ## Visuals Covered
 
+The following was compiled as a "poster"-experiment. The visuals presented here are compiled via the `patchwork` library to create a similar
+output commonly seen in research poster presentations. Two poster options (one horizontal, one vertical) are presented, both focusing on
+their own "research" questions.
+
+[ ] *Poster One - Horizontal Format* : The interntational growth of powerlifting at micro- and macro- level scales
+
+[ ] *Poster Two - Vertical Format* : The growing skill gap of elite level powerlifters
+
 ## Data
 
 All data displayed and represented is taken from ["OpenPLs free open-source dataset on powerlifting meets"](https://openpowerlifting.gitlab.io/opl-csv/a).
@@ -37,15 +45,37 @@ data |>
   select(
     where(is.character) 
     & !Name
+    & !MeetState
+    & !MeetCountry
     & !MeetTown
     & !MeetName
+    & !Division
   ) |>
   lapply(unique)
 ```
 
-# Visuals
+# Poster 1: The interntational growth of powerlifting at micro- and macro- level scales
 
-```{r}
-# data |>
-#   group_by
-```
+## Visuals
+
+### Total federations and athletes over time
+
+### Density of athletes across the globe
+
+### Gender differences in powerlifting
+
+###  Age diversity
+
+## Final Output
+
+# Poster 2: The growing skill gap of elite level powerlifters
+
+## Visuals
+
+### Squat, Bench, and Deadlift totals amongst the elite level over time
+
+### Percentile differences between elite level powerlifters and remaining athletes
+
+### Geographical, age, and gender differences in performance
+
+## Final Output

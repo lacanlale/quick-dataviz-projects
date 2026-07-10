@@ -50,8 +50,48 @@ data |>
     & !MeetTown
     & !MeetName
     & !Division
+    & !Place
   ) |>
   lapply(unique)
+```
+
+```{r}
+data$Date <- ymd(data$Date)
+data$Year <- year(data$Date)
+data <-
+    data |>
+      filter(Event == "SBD" & Equipment == "Raw" & Tested == "Yes")
+
+data <- data |>
+  mutate(
+    IPFWeightClassKG = 
+      case_when(
+        Sex == "M" ~
+          case_when(
+            is.na(BodyweightKg) ~ "Unknown",
+            BodyweightKg <= 59 ~ "59 kg",
+            BodyweightKg > 59 & BodyweightKg <= 66 ~ "66 kg",
+            BodyweightKg > 66 & BodyweightKg <= 74 ~ "74 kg",
+            BodyweightKg > 74 & BodyweightKg <= 83 ~ "83 kg",
+            BodyweightKg > 83 & BodyweightKg <= 93 ~ "93 kg",
+            BodyweightKg > 93 & BodyweightKg <= 105 ~ "105 kg",
+            BodyweightKg > 105 & BodyweightKg <= 120 ~ "120 kg",
+            TRUE ~ "120+ kg"
+          ),
+        TRUE ~ 
+          case_when(
+            is.na(BodyweightKg) ~ "Unknown",
+            BodyweightKg <= 47 ~ "47 kg",
+            BodyweightKg > 47 & BodyweightKg <= 52 ~ "52 kg",
+            BodyweightKg > 52 & BodyweightKg <= 57 ~ "57 kg",
+            BodyweightKg > 57 & BodyweightKg <= 63 ~ "63 kg",
+            BodyweightKg > 63 & BodyweightKg <= 69 ~ "69 kg",
+            BodyweightKg > 69 & BodyweightKg <= 76 ~ "76 kg",
+            BodyweightKg > 76 & BodyweightKg <= 84 ~ "84 kg",
+            TRUE ~ "84+ kg"
+          )
+      )
+  )
 ```
 
 # Poster 1: The interntational growth of powerlifting at micro- and macro- level scales
@@ -60,22 +100,91 @@ data |>
 
 ### Total federations and athletes over time
 
+```{r}
+func_counts <- function(data, grouping) {
+    return(
+      data |>
+        count(across({{ grouping }})) |>
+        drop_na()
+    )
+}
+
+yoy_total_federations <- func_counts(data, c(Year, ParentFederation))
+yoy_total_athletes <- func_counts(data, c(Year, Name))
+```
+
 ### Density of athletes across the globe
+
+
+```{r}
+total_per_country <- func_counts(data, c(Country))
+```
 
 ### Gender differences in powerlifting
 
+
+```{r}
+total_per_gender <- func_counts(data, c(Sex))
+```
+
 ###  Age diversity
 
+```{r}
+total_per_age <- func_counts(data, c(Age))
+```
+
+###  Weight Class diversity
+
+```{r}
+total_per_weight <- func_counts(data, c(IPFWeightClassKG))
+```
+
 ## Final Output
+
+```{r}
+
+```
 
 # Poster 2: The growing skill gap of elite level powerlifters
 
 ## Visuals
 
-### Squat, Bench, and Deadlift totals amongst the elite level over time
+### Squat, Bench, Deadlift, and Dots totals amongst the elite level over time
 
-### Percentile differences between elite level powerlifters and remaining athletes
+```{r}
+func_rank <- function(data, group_col, numeric_col) {
+  return(
+    data |>
+      filter(!is.na({{ numeric_col }})) |>
+      group_by(across({{ group_col }})) |>
+      mutate(rank_col = percent_rank({{ numeric_col }})) |>
+      mutate(rank_group =
+               case_when(
+                is.na(rank_col) ~ "No Rank",
+                rank_col >= 0.90 ~ "Top 10%",
+                rank_col <= 0.10 ~ "Bottom 10%",
+                TRUE ~ "Middle Tier"
+          )
+      )
+  )
+}
+
+squat_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Best3SquatKg)
+bench_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Best3BenchKg)
+deadlift_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Best3DeadliftKg)
+wilks_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Dots)
+
+geo_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG, Country), Dots)
+```
 
 ### Geographical, age, and gender differences in performance
 
+```{r}
+
+```
+
 ## Final Output
+
+```{r}
+
+```

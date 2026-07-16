@@ -149,7 +149,7 @@ func_counts <- function(data, category_col, grouping) {
 yoy_total_federations <- func_counts(data, Year, ParentFederation)
 yoy_total_athletes <- func_counts(data, Year, Name)
 
-yoy_total_federations |>
+pl_growth_chart <- yoy_total_federations |>
   ggplot(aes(x=Year, y=unique_total)) +
   geom_col() +
   geom_smooth(data = yoy_total_athletes, aes(x=Year, y=log(unique_total)))
@@ -160,10 +160,10 @@ yoy_total_federations |>
 ```{r}
 total_per_country <- func_counts(data, CountryFormatted, Name)
 mapped_data <- world_map |>
-  left_join(total_per_country, by = c("name_long" = "CountryFormatted"))
+  left_join(total_per_country, by = c("name_en" = "CountryFormatted"))
 
-mapped_data |>
-  ggplot(aes(fill = unique_total)) +
+geo_athlete_chart <- mapped_data |>
+  ggplot(aes(fill = log(unique_total))) +
   geom_sf(color = "white", size = 0.1) +
   scale_fill_viridis_c(
     na.value = "grey90",
@@ -173,14 +173,13 @@ mapped_data |>
 
 ### Gender differences in powerlifting
 
-
 ```{r}
 total_per_gender <- func_counts(data, Sex, Name)
 total_per_gender$fraction <- total_per_gender$unique_total / sum(total_per_gender$unique_total)
 total_per_gender$ymax <- cumsum(total_per_gender$fraction)
 total_per_gender$ymin <- c(0, head(total_per_gender$ymax, n=-1))
 
-total_per_gender|>
+donut_gender_chart <- total_per_gender|>
   ggplot(aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=Sex)) +
   geom_rect() +
   coord_polar(theta="y") +
@@ -194,28 +193,37 @@ total_per_weight <- func_counts(data, c(IPFWeightClassKG, Age, Sex), Name)
 
 male_totals_per_weight <- 
   total_per_weight |>
-  filter(Sex == "M") 
+  filter(Sex == "M" & IPFWeightClassKG != "Unknown") 
 
 male_heatmap <- male_totals_per_weight |>
   ggplot(aes(x=IPFWeightClassKG, y=Age, fill=log(unique_total))) +
-  geom_tile()
+  geom_raster()
 
 female_totals_per_weight <- 
   total_per_weight |>
-  filter(Sex == "F") 
+  filter(Sex == "F" & IPFWeightClassKG != "Unknown") 
 
 female_heatmap <- female_totals_per_weight |>
   ggplot(aes(x=IPFWeightClassKG, y=Age, fill=log(unique_total))) +
   geom_tile()
 
-# male_heatmap + female_heatmap
-female_heatmap
+heatmap_chart <- male_heatmap + female_heatmap
+
+male_totals_per_weight |>
+  ggplot(aes(x=IPFWeightClassKG, y=Age, fill=log(unique_total))) +
+  geom_tile() + 
+  theme(panel.background=element_rect(fill="blue", colour="blue"))
 ```
 
 ## Final Output
 
 ```{r}
-
+#| fig-width: 14
+#| fig-height: 7
+(
+  (geo_athlete_chart + pl_growth_chart) /
+  (donut_gender_chart + heatmap_chart)
+)
 ```
 
 # Poster 2: The growing skill gap of elite level powerlifters
@@ -235,8 +243,7 @@ func_rank <- function(data, group_col, numeric_col) {
                case_when(
                 is.na(rank_col) ~ "No Rank",
                 rank_col >= 0.90 ~ "Top 10%",
-                rank_col <= 0.10 ~ "Bottom 10%",
-                TRUE ~ "Middle Tier"
+                TRUE ~ "Remaining Athletes"
           )
       )
   )
@@ -248,11 +255,14 @@ deadlift_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Bes
 dots_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Dots)
 
 geo_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG, Country), Dots)
+
+dots_elites |> 
+  filter(rank_group == "Top 10%" & Sex == "F")
 ```
 
 ```{r}
 squat_elites |>
-  ggplot(aes(x=Year, y=Best3SquatKg, color=rank_group)) +
+  ggplot(aes(x=Year, y=Best3SquatKg, color=rank_group, fill=Sex)) +
   geom_point()
 
 bench_elites |>
@@ -263,13 +273,31 @@ deadlift_elites |>
   ggplot(aes(x=Year, y=Best3DeadliftKg, color=rank_group)) +
   geom_point()
 
-wilks_elites |>
-  ggplot(aes(x=Year, y=Dots, color=rank_group)) +
+dots_elites |>
+  ggplot(aes(x=Year, y=Dots, fill=Sex, color=rank_group)) +
   geom_point()
+
+dots_elites |> 
+  filter(rank_group == "Top 10%") |>
+  ggplot(aes(x=IPFWeightClassKG, y=Best3SquatKg, fill=Sex)) +
+  geom_violin()
 ```
 
 ## Final Output
 
 ```{r}
+#| fig-width: 7
+#| fig-height: 14
+
+
+# (
+#   ( + ) # Dots
+#    /
+#   ( + ) # Squat
+#    /
+#   ( + ) # Bench
+#    /
+#   ( + ) # Deadlift
+# )
 
 ```

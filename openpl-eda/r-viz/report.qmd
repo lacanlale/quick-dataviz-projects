@@ -23,11 +23,14 @@ All data displayed and represented is taken from ["OpenPLs free open-source data
 #| warning: false
 #| include: false
 
+library(colorspace)
 library(countries)
 library(dplyr)
+library(ggridges)
 library(jsonlite)
 library(ggforce)
 library(ggplot2)
+library(ggrepel)
 library(lubridate)
 library(patchwork)
 library(rnaturalearth)
@@ -35,7 +38,10 @@ library(scales)
 library(sf)
 library(tidyverse)
 
+palette <- "YlGnBu"
 data <- read_csv("openpowerlifting-2026-06-27.csv") 
+
+sequential_hcl(n = 8, palette = palette)
 ```
 
 # Cleaning
@@ -120,6 +126,8 @@ data$IPFWeightClassKG <- factor(
       )
   )
 
+data$Age <- round(data$Age)
+
 data$CountryFormatted <- country_name(data$Country, to = "name_en") 
 world_map <- ne_countries(scale = "medium", returnclass = "sf")
 
@@ -135,6 +143,17 @@ data |>
 
 ## Visuals
 
+```{r}
+poster_1_data <- data |>
+  filter(
+      IPFWeightClassKG != "Unknown" &
+      Sex != "Mx"
+  )
+
+panel_background_color <- "#d4faf1"
+poster_background <- "#defaf3"
+```
+
 ### Total federations and athletes over time
 
 ```{r}
@@ -146,73 +165,151 @@ func_counts <- function(data, category_col, grouping) {
     )
 }
 
-yoy_total_federations <- func_counts(data, Year, ParentFederation)
-yoy_total_athletes <- func_counts(data, Year, Name)
+yoy_total_federations <- func_counts(poster_1_data, Year, ParentFederation)
+yoy_total_athletes <- 
+  func_counts(poster_1_data, Year, Name) |>
+  mutate(
+    label=if_else(
+      Year == max(Year),
+      paste(
+        Year, 
+        "athlete total:", 
+        unique_total,
+        "| Log total:",
+        round(log(unique_total),2)
+      ),
+      NA_character_
+    )
+  )
 
 pl_growth_chart <- yoy_total_federations |>
   ggplot(aes(x=Year, y=unique_total)) +
-  geom_col() +
-  geom_smooth(data = yoy_total_athletes, aes(x=Year, y=log(unique_total)))
+  geom_col(
+    fill="#AEE4C1"
+  ) +
+  geom_smooth(data=yoy_total_athletes, aes(x=Year, y=log(unique_total)), se=FALSE, color="#007EB3") +
+  geom_label_repel(
+    data=yoy_total_athletes, aes(x=Year, y=log(unique_total), label=label),
+    color = "#007EB3",
+    nudge_y = 2,
+    segment.color = NA
+  ) + 
+  scale_x_continuous(name="Year") + 
+  scale_y_continuous(name="Total Unique Federations") +
+  labs(title="Total through federations and athletes") +
+  theme(
+    panel.background=element_rect(fill=panel_background_color, color="#FCFFDD"),
+    plot.background = element_rect(fill = poster_background)
+  )
 ```
 
 ### Density of athletes across the globe
 
 ```{r}
-total_per_country <- func_counts(data, CountryFormatted, Name)
+total_per_country <- func_counts(poster_1_data, CountryFormatted, Name)
 mapped_data <- world_map |>
   left_join(total_per_country, by = c("name_en" = "CountryFormatted"))
 
-geo_athlete_chart <- mapped_data |>
+geo_athlete_chart <-
+  mapped_data |>
   ggplot(aes(fill = log(unique_total))) +
   geom_sf(color = "white", size = 0.1) +
-  scale_fill_viridis_c(
-    na.value = "grey90",
-    option = "plasma"
+  scale_fill_continuous_sequential(
+    palette = palette,
+    name="Log Total",
+    na.value="0"
+  ) +
+  labs(title="International distribution of athletes") +
+  theme(
+    panel.background=element_rect(fill=panel_background_color, color="#FCFFDD"),
+    plot.background = element_rect(fill = poster_background),
+    legend.background = element_rect(fill = poster_background)
   )
 ```
 
 ### Gender differences in powerlifting
 
 ```{r}
-total_per_gender <- func_counts(data, Sex, Name)
+total_per_gender <- func_counts(poster_1_data, Sex, Name)
 total_per_gender$fraction <- total_per_gender$unique_total / sum(total_per_gender$unique_total)
 total_per_gender$ymax <- cumsum(total_per_gender$fraction)
 total_per_gender$ymin <- c(0, head(total_per_gender$ymax, n=-1))
+total_per_gender <- total_per_gender |>
+  mutate(
+    end_angle = 2*pi*cumsum(unique_total)/sum(unique_total),
+    start_angle = lag(end_angle, default = 0), 
+    mid_angle = 0.5*(start_angle + end_angle),
+    hjust = if_else(mid_angle > pi, 1, 0),
+    vjust = if_else(mid_angle < pi/2 | mid_angle > 3*pi/2, 0, 1)
+  )
 
-donut_gender_chart <- total_per_gender|>
-  ggplot(aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=Sex)) +
-  geom_rect() +
-  coord_polar(theta="y") +
-  xlim(c(2, 4)) 
+donut_gender_chart <- total_per_gender |>
+  ggplot(
+    aes(
+      x0 = 0, y0 = 0, r0 = 0, r = 1,
+      start = start_angle, end = end_angle,
+      fill = Sex
+    )
+  ) +
+  geom_arc_bar() +
+  geom_text( 
+    aes(
+      x = 0.6 * sin(mid_angle),
+      y = 0.6 * cos(mid_angle),
+      label = unique_total
+    )
+  ) +
+  geom_text(
+    aes(
+      x = 1.05 * sin(mid_angle),
+      y = 1.05 * cos(mid_angle),
+      label = Sex,
+      hjust = hjust, vjust = vjust
+    )
+  ) +
+  coord_fixed(
+    xlim = c(-1.8, 1.3)
+  ) +
+  scale_x_continuous(name=NULL, labels=NULL, breaks=NULL) +
+  scale_y_continuous(name=NULL, labels=NULL, breaks=NULL) +
+  labs(
+    title="Gender Distribution",
+  ) +
+  theme(
+    panel.background=element_rect(fill=poster_background, color=poster_background),
+    plot.background = element_rect(fill = poster_background),
+    legend.position = "none"
+  )
 ```
 
 ###  Weight Class : Age diversity 
 
 ```{r}
-total_per_weight <- func_counts(data, c(IPFWeightClassKG, Age, Sex), Name)
+total_per_weight <- func_counts(poster_1_data, c(IPFWeightClassKG, Age, Sex), Name)
 
-male_totals_per_weight <- 
-  total_per_weight |>
-  filter(Sex == "M" & IPFWeightClassKG != "Unknown") 
-
-male_heatmap <- male_totals_per_weight |>
-  ggplot(aes(x=IPFWeightClassKG, y=Age, fill=log(unique_total))) +
-  geom_raster()
-
-female_totals_per_weight <- 
-  total_per_weight |>
-  filter(Sex == "F" & IPFWeightClassKG != "Unknown") 
-
-female_heatmap <- female_totals_per_weight |>
-  ggplot(aes(x=IPFWeightClassKG, y=Age, fill=log(unique_total))) +
-  geom_tile()
-
-heatmap_chart <- male_heatmap + female_heatmap
-
-male_totals_per_weight |>
+heatmap_chart <- total_per_weight |>
   ggplot(aes(x=IPFWeightClassKG, y=Age, fill=log(unique_total))) +
   geom_tile() + 
-  theme(panel.background=element_rect(fill="blue", colour="blue"))
+  scale_fill_continuous_sequential(
+    palette = palette,
+    name="Log Total",
+    na.value="0"
+  ) +
+  facet_wrap(
+    ~fct_rev(Sex),
+    scales="free_x"
+  ) +
+  scale_x_discrete(name="IPF Standard Weight Class (kg)") +
+  labs(
+    title="Total Athletes per IPF Standardized Weight Class"
+  ) + 
+  theme(
+    panel.background=element_rect(fill=panel_background_color, color="#FCFFDD"),
+    plot.background = element_rect(fill = poster_background),
+    legend.background = element_rect(fill = poster_background),
+    strip.background = element_rect(fill = "#65CCB3")
+  )
+
 ```
 
 ## Final Output
@@ -221,9 +318,21 @@ male_totals_per_weight |>
 #| fig-width: 14
 #| fig-height: 7
 (
-  (geo_athlete_chart + pl_growth_chart) /
-  (donut_gender_chart + heatmap_chart)
-)
+  (pl_growth_chart + geo_athlete_chart) /
+  ((donut_gender_chart + heatmap_chart) + plot_layout(widths = c(1, 3)))
+) &
+  plot_annotation(
+    title = 'The Growth of Powerlifting through the years',
+    subtitle = 'Totals represented through log transformations',
+    caption = 'Source: OpenPowerlifting: open-source data',
+    theme = theme(
+      plot.title = element_text(size = 22, face = "bold"),
+      plot.subtitle = element_text(size = 16),
+      plot.background = element_rect(fill = poster_background),
+      panel.border = element_blank(),
+      panel.background = element_blank(),
+    )
+  )
 ```
 
 # Poster 2: The growing skill gap of elite level powerlifters
@@ -270,12 +379,14 @@ bench_elites |>
   geom_point()
 
 deadlift_elites |>
-  ggplot(aes(x=Year, y=Best3DeadliftKg, color=rank_group)) +
+  ggplot(aes(x=Year, y=Best3DeadliftKg)) +
   geom_point()
 
 dots_elites |>
-  ggplot(aes(x=Year, y=Dots, fill=Sex, color=rank_group)) +
-  geom_point()
+  filter(Sex != "Mx") |>
+  ggplot(aes(x=Dots, y=factor(Year), fill=IPFWeightClassKG)) +
+  geom_density_ridges() + 
+  facet_wrap(~Sex, ncol=2, scales="free")
 
 dots_elites |> 
   filter(rank_group == "Top 10%") |>

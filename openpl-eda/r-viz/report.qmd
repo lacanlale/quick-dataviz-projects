@@ -11,9 +11,9 @@ The following was compiled as a "poster"-experiment. The visuals presented here 
 output commonly seen in research poster presentations. Two poster options (one horizontal, one vertical) are presented, both focusing on
 their own "research" questions.
 
-[ ] *Poster One - Horizontal Format* : The interntational growth of powerlifting at micro- and macro- level scales
+[x] *Poster One - Horizontal Format* : The international growth of powerlifting at micro- and macro- level scales
 
-[ ] *Poster Two - Vertical Format* : The growing skill gap of elite level powerlifters
+[x] *Poster Two - Vertical Format* : The growing skill gap of elite level powerlifters
 
 ## Data
 
@@ -198,8 +198,9 @@ pl_growth_chart <- yoy_total_federations |>
   scale_y_continuous(name="Total Unique Federations") +
   labs(title="Total through federations and athletes") +
   theme(
-    panel.background=element_rect(fill=panel_background_color, color="#FCFFDD"),
-    plot.background = element_rect(fill = poster_background)
+    panel.background=element_rect(fill=panel_background_color),
+    plot.background = element_rect(fill = poster_background),
+    axis.line = element_line(linewidth = 1, colour =  "#65CCB3")
   )
 ```
 
@@ -213,7 +214,7 @@ mapped_data <- world_map |>
 geo_athlete_chart <-
   mapped_data |>
   ggplot(aes(fill = log(unique_total))) +
-  geom_sf(color = "white", size = 0.1) +
+  geom_sf(color = "#26185F", size = 0.1) +
   scale_fill_continuous_sequential(
     palette = palette,
     name="Log Total",
@@ -221,9 +222,13 @@ geo_athlete_chart <-
   ) +
   labs(title="International distribution of athletes") +
   theme(
-    panel.background=element_rect(fill=panel_background_color, color="#FCFFDD"),
+    panel.background=element_rect(fill=panel_background_color),
     plot.background = element_rect(fill = poster_background),
-    legend.background = element_rect(fill = poster_background)
+    legend.background = element_rect(fill = poster_background),
+    panel.grid = element_blank(),
+    axis.line = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
   )
 ```
 
@@ -272,12 +277,10 @@ donut_gender_chart <- total_per_gender |>
   ) +
   scale_x_continuous(name=NULL, labels=NULL, breaks=NULL) +
   scale_y_continuous(name=NULL, labels=NULL, breaks=NULL) +
-  labs(
-    title="Gender Distribution",
-  ) +
+  labs(title="Gender Distribution",) +
   theme(
-    panel.background=element_rect(fill=poster_background, color=poster_background),
-    plot.background = element_rect(fill = poster_background),
+    panel.background = element_rect(fill=poster_background),
+    plot.background = element_rect(fill=poster_background),
     legend.position = "none"
   )
 ```
@@ -304,10 +307,11 @@ heatmap_chart <- total_per_weight |>
     title="Total Athletes per IPF Standardized Weight Class"
   ) + 
   theme(
-    panel.background=element_rect(fill=panel_background_color, color="#FCFFDD"),
+    panel.background=element_rect(fill=panel_background_color),
     plot.background = element_rect(fill = poster_background),
     legend.background = element_rect(fill = poster_background),
-    strip.background = element_rect(fill = "#65CCB3")
+    strip.background = element_rect(fill = "#65CCB3"),
+    axis.line = element_line(linewidth = 1, colour =  "#65CCB3")
   )
 
 ```
@@ -324,13 +328,13 @@ heatmap_chart <- total_per_weight |>
   plot_annotation(
     title = 'The Growth of Powerlifting through the years',
     subtitle = 'Totals represented through log transformations',
-    caption = 'Source: OpenPowerlifting: open-source data',
+    caption = 'Source: OpenPowerlifting',
     theme = theme(
       plot.title = element_text(size = 22, face = "bold"),
       plot.subtitle = element_text(size = 16),
       plot.background = element_rect(fill = poster_background),
       panel.border = element_blank(),
-      panel.background = element_blank(),
+      panel.background = element_blank()
     )
   )
 ```
@@ -382,17 +386,20 @@ deadlift_elites |>
   ggplot(aes(x=Year, y=Best3DeadliftKg)) +
   geom_point()
 
-dots_elites |>
-  filter(Sex != "Mx") |>
-  ggplot(aes(x=Dots, y=factor(Year), fill=IPFWeightClassKG)) +
-  geom_density_ridges() + 
+deadlift_elites |>
+  filter(Sex != "Mx" &  Year >= 2000 & IPFWeightClassKG != "Unknown") |>
+  ggplot(aes(x=Dots, y=factor(Year), fill=rank_group, color=IPFWeightClassKG)) +
+  geom_density_ridges(alpha=0.5) + 
   facet_wrap(~Sex, ncol=2, scales="free")
-
-dots_elites |> 
-  filter(rank_group == "Top 10%") |>
-  ggplot(aes(x=IPFWeightClassKG, y=Best3SquatKg, fill=Sex)) +
-  geom_violin()
 ```
+
+```{r}
+ggplot(iris, aes(x = Sepal.Length, y = Species, fill = after_stat(x))) +
+  geom_density_ridges_gradient(scale = 2, rel_min_height = 0.01) +
+  scale_fill_viridis_c(option = "C")
+
+```
+
 
 ## Final Output
 

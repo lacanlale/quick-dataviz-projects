@@ -13,7 +13,7 @@ their own "research" questions.
 
 [x] *Poster One - Horizontal Format* : The international growth of powerlifting at micro- and macro- level scales
 
-[x] *Poster Two - Vertical Format* : The growing skill gap of elite level powerlifters
+[x] *Poster Two - Vertical Format* : Increase in Big 3 Bests over time
 
 ## Data
 
@@ -365,44 +365,6 @@ func_rank <- function(data, group_col, numeric_col) {
 squat_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Best3SquatKg)
 bench_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Best3BenchKg)
 deadlift_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Best3DeadliftKg)
-dots_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG), Dots)
-
-geo_elites <- func_rank(data, c(Year, Sex, AgeClass, IPFWeightClassKG, Country), Dots)
-
-dots_elites |> 
-  filter(rank_group == "Top 10%" & Sex == "F")
-```
-
-```{r}
-#| fig-width: 14
-#| fig-height: 24
-squat_elites |>
-  ggplot(aes(x=Year, y=Best3SquatKg, color=rank_group, fill=Sex)) +
-  geom_point()
-
-bench_elites |>
-  ggplot(aes(x=Year, y=Best3BenchKg, color=rank_group)) +
-  geom_point()
-
-deadlift_elites |>
-  ggplot(aes(x=Year, y=Best3DeadliftKg)) +
-  geom_point()
-
-deadlift_elites |>
-  filter(
-    Sex != "Mx" &  
-    Year >= 2016 & 
-    IPFWeightClassKG != "Unknown" &
-    rank_group != "No Rank"
-  ) |>
-  ggplot(aes(x=Dots, y=fct_rev(factor(Year)), fill=rank_group, color=rank_group)) +
-  geom_density_ridges(alpha=0.75) + 
-  facet_wrap(fct_rev(Sex) ~ IPFWeightClassKG, ncol=2, dir="v") +
-  scale_x_continuous(name="IPF Standard Weight Class (kg)") +
-  scale_y_discrete(name="") + 
-  scale_fill_discrete_diverging(name="Ranking", palette="Blue-Red") + 
-  scale_color_discrete_diverging(name="Ranking", palette="Blue-Red") + 
-  labs(title="Total Athletes per IPF Standardized Weight Class")
 ```
 
 ```{r}
@@ -418,7 +380,7 @@ func_ridge_plot <- function(data, time_col, val_col, group_col, sex_col, facet_g
     |>
       ggplot(aes(x={{ val_col }}, y=fct_rev(factor({{ time_col }})), fill={{ group_col }})) +
       geom_density_ridges(alpha=0.5) +
-      facet_wrap(vars({{ sex_col }}, {{ facet_group }}), ncol=2, dir="v") +
+      facet_wrap(vars({{ sex_col }}, {{ facet_group }}), scales="free_x", ncol=2, dir="v") +
       scale_x_continuous(name={{ x_label }}) +
       scale_y_discrete(name="") +
       scale_fill_discrete_diverging(name="Ranking", palette="Blue-Red") +
@@ -426,10 +388,7 @@ func_ridge_plot <- function(data, time_col, val_col, group_col, sex_col, facet_g
       labs(title={{ title }})
   )
 }
-
-func_ridge_plot(deadlift_elites, Year, Best3DeadliftKg, rank_group, fct_rev(Sex), IPFWeightClassKG, "Total (kg)", "Deadlift")
 ```
-
 
 ## Final Output
 
@@ -437,12 +396,24 @@ func_ridge_plot(deadlift_elites, Year, Best3DeadliftKg, rank_group, fct_rev(Sex)
 #| fig-width: 14
 #| fig-height: 28
 
-
 (
-  func_ridge_plot(squat_elites, Year, Best3SquatKg, rank_group, fct_rev(Sex), IPFWeightClassKG, "Total (kg)", "Squat") / # Squat
-  func_ridge_plot(bench_elites, Year, Best3BenchKg, rank_group, fct_rev(Sex), IPFWeightClassKG, "Total (kg)", "Bench") / # Bench
-  func_ridge_plot(deadlift_elites, Year, Best3DeadliftKg, rank_group, fct_rev(Sex), IPFWeightClassKG, "Total (kg)", "Deadlift") / # Deadlift
-  func_ridge_plot(dots_elites, Year, Dots, rank_group, fct_rev(Sex), IPFWeightClassKG, "DOTS Score", "DOTS")
-)
+  func_ridge_plot(squat_elites, Year, Best3SquatKg, rank_group, fct_rev(Sex), IPFWeightClassKG, "Total (kg)", "Squat") + # Squat
+  func_ridge_plot(bench_elites, Year, Best3BenchKg, rank_group, fct_rev(Sex), IPFWeightClassKG, "Total (kg)", "Bench") + # Bench
+  func_ridge_plot(deadlift_elites, Year, Best3DeadliftKg, rank_group, fct_rev(Sex), IPFWeightClassKG, "Total (kg)", "Deadlift") # Deadlift
+) + 
+  plot_layout(
+    guides = "collect",
+    axes = "keep"
+  ) &
+  plot_annotation(
+    title = 'Increase in lifts over the past decade',
+    caption = 'Source: OpenPowerlifting',
+    theme = theme(
+      plot.title = element_text(size = 22, face = "bold"),
+      plot.subtitle = element_text(size = 16),
+      panel.border = element_blank(),
+      panel.background = element_blank()
+    )
+  )
 
 ```

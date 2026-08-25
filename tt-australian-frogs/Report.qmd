@@ -31,7 +31,7 @@ arrow_style <- arrow(
 )
 
 frogID_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-02/frogID_data.csv') |>
-  separate_wider_delim(scientificName, delim = " ", names = c("genus", NA)) |>
+  separate_wider_delim(scientificName, delim = " ", names = c("genus", NA), cols_remove=FALSE) |>
   mutate(
     genus_groups=fct_lump_n(genus, n = groups, ties.method="first")
   )
@@ -73,7 +73,7 @@ combined_frogs <-
 combined_frogs$season = factor(combined_frogs$season, levels = c("Winter", "Spring", "Summer", "Autumn"))
 ```
 
-```{r}
+
 ```{r}
 #| fig-width: 11
 #| fig-height: 5
@@ -219,6 +219,13 @@ season_counts_per_hour_plot <-
     panel.grid = element_line(color = "#D7D7D7"),
     legend.position = "right"
   )
+```
+
+```{r}
+combined_frogs |>
+  group_by(scientificName) |>
+  summarise(total = n()) |>
+  arrange(-total)
 ```
 
 ```{r}
